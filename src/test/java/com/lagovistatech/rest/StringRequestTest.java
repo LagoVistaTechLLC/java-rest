@@ -2,15 +2,13 @@ package com.lagovistatech.rest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class StringRequestTest {
 	@Test
-	void test() throws Exception {
+	void Post_Success() throws Exception {
 		JsonPlaceHolderPost post = new JsonPlaceHolderPost();
 		post.setUserId(128);
 		post.setTitle("Test");

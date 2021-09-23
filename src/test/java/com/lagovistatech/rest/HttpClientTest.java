@@ -13,10 +13,9 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 class HttpClientTest {
 	@Test
-	void test() throws Exception {
+	void Post_Success() throws Exception {
 		JsonPlaceHolderPost post = new JsonPlaceHolderPost();
 		post.setUserId(128);
 		post.setTitle("Test");
@@ -46,5 +45,4 @@ class HttpClientTest {
 		assertEquals(post.getBody(), newPost.getBody());
 		assertEquals(post.getUserId(), newPost.getUserId());
 	}
-
 }
