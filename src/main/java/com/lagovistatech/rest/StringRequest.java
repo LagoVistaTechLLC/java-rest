@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StringRequest implements Request<String, String> {
-	private Map<String, Header> headers = new HashMap<String, Header>();
+	private Map<String, Header> headers = new HashMap<>();
 	private String url = null;
 	private Method method = null;
 	private String body = null;
@@ -22,13 +22,19 @@ public class StringRequest implements Request<String, String> {
 	public StringResponse send() throws Exception {
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest.Builder requestBuilder = HttpRequest.newBuilder();
-		
+		requestBuilder.version(java.net.http.HttpClient.Version.HTTP_1_1);
+				
 		for(String key : headers.keySet())
 			requestBuilder.header(key, headers.get(key).getValue());
-				
+						
 		requestBuilder.uri(URI.create(url));
 		
-		HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(body);
+		HttpRequest.BodyPublisher bodyPublisher;
+		if(body != null)
+			bodyPublisher = HttpRequest.BodyPublishers.ofString(body);
+		else
+			bodyPublisher = HttpRequest.BodyPublishers.noBody();
+		
 		requestBuilder.method(method.name(), bodyPublisher);
 		HttpResponse<String> response = client.send(requestBuilder.build(), BodyHandlers.ofString());
 

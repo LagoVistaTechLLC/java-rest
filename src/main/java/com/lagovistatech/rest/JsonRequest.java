@@ -23,7 +23,6 @@ public class JsonRequest<I, O> implements Request<I, O> {
 
 	public JsonResponse<O> send() throws Exception {
 		StringResponse resp = request.send();
-		return new JsonResponse<O>(responseBodyType, resp);
+		return new JsonResponse<>(responseBodyType, resp);
 	}
-
 }
